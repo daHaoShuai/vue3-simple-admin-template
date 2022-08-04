@@ -1,8 +1,7 @@
 <template>
-  <div class="w-full min-h-screen flex justify-center items-center">
-    <a-form :model="formState" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }" autocomplete="off"
-      @finish="onFinish" @finishFailed="onFinishFailed">
-      <a-form-item label="账号" name="username" :rules="[{ required: true, message: '请输入账号' }]">
+  <div class="login">
+    <a-form :model="formState" name="basic" @finish="onFinish" @finishFailed="onFinishFailed">
+      <a-form-item style="color: #fff;" label="账号" name="username" :rules="[{ required: true, message: '请输入账号' }]">
         <a-input v-model:value="formState.username" />
       </a-form-item>
 
@@ -10,7 +9,7 @@
         <a-input-password v-model:value="formState.password" />
       </a-form-item>
 
-      <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+      <a-form-item>
         <a-button type="primary" html-type="submit">登录</a-button>
       </a-form-item>
     </a-form>
@@ -46,3 +45,15 @@ const onFinishFailed = errorInfo => {
   console.log('Failed:', errorInfo)
 }
 </script>
+
+<style scoped>
+.login {
+  background: url('../assets/login.jpg') no-repeat center;
+  background-size: cover;
+  @apply w-full min-h-screen flex justify-center items-center
+}
+
+::v-deep(.ant-form-item-label)>label {
+  color: #ffffff;
+}
+</style>

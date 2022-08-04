@@ -22,7 +22,6 @@ export const useUserStore = defineStore('user', {
     },
     // 注销
     logout() {
-      console.log('okk')
       // 清空用户信息
       this.userInfo = {}
     }

@@ -31,6 +31,15 @@ export const routes = [
         component: () => import('@view/Home.vue'),
       },
       {
+        path: '/user',
+        name: 'user',
+        meta: {
+          title: '用户管理',
+          logo: 'user-outlined'
+        },
+        component: () => import('@view/User.vue'),
+      },
+      {
         path: '/about',
         name: 'about',
         meta: {
