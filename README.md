@@ -36,8 +36,8 @@ pnpm dev
 项目运行起来会自动打开5000端口,或者直接在浏览器输入 http://127.0.0.1:5000/ 访问
 
 ## 页面预览
-![alt 登录页面]('./imgs/one.png')
+![alt 登录页面](/imgs/one.png)
 
-![alt 首页]('./imgs/two.png')
+![alt 首页](/imgs/two.png)
 
-![alt 用户管理]('./imgs/three.png')
+![alt 用户管理](/imgs/three.png)
