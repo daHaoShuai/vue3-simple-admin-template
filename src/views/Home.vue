@@ -1,6 +1,8 @@
 <template>
-  <div class="w-full h-full">
-    <div class="w-2/3 h-1/2 mt-4 ml-4" ref="echar"></div>
+  <div class="w-full h-full flex justify-center items-center">
+    <div class="w-11/12 h-11/12">
+      <div class="w-2/3 h-2/3 m-0 m-auto" ref="echar"></div>
+    </div>
   </div>
 </template>
 
@@ -45,7 +47,7 @@ onMounted(() => {
     // 绘制图表
     myChart.setOption({
       title: {
-        text: 'ECharts 入门示例'
+        text: '商品销量'
       },
       tooltip: {},
       xAxis: {
@@ -56,7 +58,7 @@ onMounted(() => {
         {
           name: '销量',
           type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
+          data: [5000, 20000, 30060, 10000, 12500, 20000]
         }
       ]
     });
