@@ -109,6 +109,10 @@ const showUserInfo = () => {
 const logoutNow = () => {
   // 清除用户信息
   userStore.logout()
+  // tab栏也要清除
+  tabStore.logout()
+  // 左侧菜单栏也要回到首页
+  selectedKeys.value = ['home']
   // 跳转登录页面
   router.push({ name: 'login' })
   message.success('退出登录')

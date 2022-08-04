@@ -23,6 +23,10 @@ export const useTabStore = defineStore('tabs', {
       if (idx !== -1 && idx !== 0) {
         this.tabs.splice(idx, 1)
       }
+    },
+    logout() {
+      // 退出登录的时候回到初始状态
+      this.tabs = ['首页']
     }
   }
 })
