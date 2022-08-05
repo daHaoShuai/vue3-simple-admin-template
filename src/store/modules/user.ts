@@ -1,8 +1,14 @@
 import { defineStore } from 'pinia'
-import { login } from '@api/user'
+import { login } from '@/api/user'
+
+export type userType = {
+  name?: string,
+  avatar?: string,
+  role?: Array<string>
+}
 
 export const useUserStore = defineStore('user', {
-  state: () => {
+  state: (): { userInfo: userType } => {
     return {
       userInfo: {}
     }
@@ -12,7 +18,7 @@ export const useUserStore = defineStore('user', {
   },
   actions: {
     // 登录
-    async login(username, password) {
+    async login(username: string, password: string): Promise<string> {
       const { msg, data } = await login(username, password)
       if (msg === '登录成功') {
         // 登录成功就更新用户信息

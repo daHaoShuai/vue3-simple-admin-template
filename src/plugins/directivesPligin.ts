@@ -1,14 +1,14 @@
 // 自定义指令插件
-
+import { App, Directive, DirectiveBinding } from 'vue'
 // 移动元素指令
-const move = (el, binding) => {
+const move: Directive<any, void> = (el: HTMLElement, _: DirectiveBinding) => {
 
-  const elMove = (e) => {
+  const elMove = (e: MouseEvent) => {
     // 定位到鼠标的位置,e.client*指向的是元素的左上角
     const X = e.clientX - el.offsetLeft
     const Y = e.clientY - el.offsetTop
     // 改变元素的位置
-    const domMove = e => {
+    const domMove = (e: MouseEvent) => {
       el.style.left = e.clientX - X + 'px'
       el.style.top = e.clientY - Y + 'px'
     }
@@ -21,7 +21,8 @@ const move = (el, binding) => {
 
   }
   // 给当前元素的父元素加上相对定位
-  el.parentNode.style.position = 'relative'
+  const parentElement: HTMLElement = el.parentElement!
+  parentElement.style.position = 'relative'
   // 给元素加上鼠标移动样式
   el.style.cursor = 'move'
   // 给元素的定位设置为绝对定位
@@ -30,16 +31,23 @@ const move = (el, binding) => {
   el.addEventListener('mousedown', elMove)
 }
 
-
-const directives = {
-  move
+type dirType = {
+  key: string,
+  value: Directive
 }
 
+const directives: Array<dirType> = [
+  {
+    key: 'move',
+    value: move
+  }
+]
+
 export default {
-  install(app) {
+  install(app: App) {
     // 全局注册指令
-    Object.keys(directives).forEach(key => {
-      app.directive(key, directives[key])
+    directives.forEach(d => {
+      app.directive(d.key, d.value)
     })
   }
 }

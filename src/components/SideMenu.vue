@@ -12,10 +12,10 @@
   </a-layout-sider>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { storeToRefs } from 'pinia'
-import { useMenuStore } from '@store/menu'
-import { useTabStore } from '@store/tabs'
+import { useMenuStore, menuType } from '@/store/modules/menu'
+import { useTabStore } from '@/store/modules/tabs'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 
@@ -28,13 +28,17 @@ const logoMsg = computed(() => collapsed.value ? '' : '后台管理')
 const tabStore = useTabStore()
 
 // 菜单按钮点击事件
-const handClickMenu = item => {
+const handClickMenu = (item: menuType) => {
   // 添加tab到tab栏
-  tabStore.add(item.title)
-  // 跳转指定路由的页面
-  router.push({
-    name: item.name
-  })
+  if (item.title) {
+    tabStore.add(item.title)
+  }
+  if (item.name) {
+    // 跳转指定路由的页面
+    router.push({
+      name: item.name
+    })
+  }
 }
 </script>
 

@@ -14,7 +14,7 @@
   </a-layout>
 </template>
 
-<script setup>
-import SideMenu from '@component/SideMenu.vue'
-import Head from '@component/Head.vue'
+<script lang="ts" setup>
+import SideMenu from '@/components/SideMenu.vue'
+import Head from '@/components/Head.vue'
 </script>

@@ -6,7 +6,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script lang="ts" setup>
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useMenuStore } from '../store/modules/menu'
@@ -14,7 +14,7 @@ import { useMenuStore } from '../store/modules/menu'
 const router = useRouter()
 const { selectedKeys } = storeToRefs(useMenuStore())
 
-const goHome = _ => {
+const goHome = () => {
   selectedKeys.value = ['home']
   router.push({
     name: 'home'

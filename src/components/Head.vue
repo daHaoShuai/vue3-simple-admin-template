@@ -43,15 +43,15 @@
   </a-modal>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from '@ant-design/icons-vue';
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useMenuStore } from '@store/menu'
-import { useUserStore } from '@store/user'
-import { useTabStore } from '@store/tabs'
-import { composeXYZ } from '@util'
+import { useMenuStore } from '@/store/modules/menu'
+import { useUserStore, userType } from '@/store/modules/user'
+import { useTabStore } from '@/store/modules/tabs'
+import { composeXYZ } from '@/utils'
 import { message } from 'ant-design-vue';
 
 const router = useRouter()
@@ -65,13 +65,13 @@ const tabStore = useTabStore()
 const { tabs } = storeToRefs(tabStore)
 
 // 获取当前tab对于的路由名字
-const filterMenuInTitle = tab => menus.value.filter(menu => menu.title === tab)
-const mapName = arr => arr.map(m => m.name)
+const filterMenuInTitle = (tab: string) => menus.value.filter(menu => menu.title === tab)
+const mapName = (arr: Array<userType>) => arr.map(item => item.name)
 // 根据tab标签的名字获取要跳转的路由的名字 相当于 mapName(filterMenu(tab))
-const pathName = tab => composeXYZ(filterMenuInTitle)(mapName)(tab)
+const pathName = (tab: string) => composeXYZ(filterMenuInTitle)(mapName)(tab)
 
 // tab标签点击事件
-const handTab = (tab) => {
+const handTab = (tab: string) => {
   const names = pathName(tab)
   // 多次点击tab标签时判断一下要去的地方跟现在是不是一样的,一样的就不跳转了
   if (names && names.length === 1 && route.name !== names[0]) {
@@ -85,7 +85,7 @@ const handTab = (tab) => {
 }
 
 // 关闭tab标签的回调
-const closeTab = (tab, index) => {
+const closeTab = (tab: string, index: number) => {
   // 从状态中删除这个标签
   tabStore.del(tab)
   if (index >= 1) {

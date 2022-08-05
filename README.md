@@ -7,6 +7,7 @@
 {
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@types/node": "^18.6.4",
     "ant-design-vue": "^3.2.10",
     "dayjs": "^1.11.4",
     "echarts": "^5.3.3",
@@ -16,9 +17,11 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.0",
+    "typescript": "^4.6.4",
     "unocss": "^0.45.1",
     "unplugin-vue-components": "^0.21.2",
-    "vite": "^3.0.0"
+    "vite": "^3.0.0",
+    "vue-tsc": "^0.38.4"
   }
 }
 ```

@@ -3,25 +3,28 @@
   <canvas ref="canvas"></canvas>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 
 const props = defineProps({
   size: Number,
-  data: Array
+  data: {
+    type: Array<number>,
+    default: []
+  }
 })
 
-const canvas = ref(null)
+const canvas = ref<HTMLCanvasElement>()
 
 // 获取当前坐标的偏移点
-const cp = (x, y, d, r) => {
+const cp = (x: number, y: number, d: number, r: number) => {
   const x1 = r * Math.cos(d * Math.PI / 180) + x
   const y1 = r * Math.sin(d * Math.PI / 180) + y
   return [x1, y1]
 }
 
 // 绘制扇形
-const drawFan = (x, y, r, d1, d2, ctx) => {
+const drawFan = (x: number, y: number, r: number, d1: number, d2: number, ctx: CanvasRenderingContext2D) => {
   const sp = cp(x, y, d1, r)
   const ep = cp(x, y, d2, r)
   ctx.beginPath()
@@ -34,7 +37,7 @@ const drawFan = (x, y, r, d1, d2, ctx) => {
   ctx.fill()
 }
 
-const draw = (ctx, size, data) => {
+const draw = (ctx: CanvasRenderingContext2D, size: number, data: Array<number>) => {
   // 把数据从大到小排序
   data.sort((a, b) => b - a)
   // 数据总和
@@ -43,7 +46,7 @@ const draw = (ctx, size, data) => {
   let sd = 0
   // 清空画布
   ctx.clearRect(0, 0, size, size)
-  for (let i in data) {
+  for (let i = 0; i < data.length; i++) {
     // 结束角度
     const ed = data[i] / sum * 360 + sd
     ctx.fillStyle = `hsl(${i / data.length * 360}deg, 55%, 50%)`
@@ -54,10 +57,10 @@ const draw = (ctx, size, data) => {
 
 onMounted(() => {
   const can = canvas.value
-  if (can) {
+  if (can && props.size) {
     const size = props.size
     can.width = can.height = size
-    const ctx = can.getContext('2d')
+    const ctx: CanvasRenderingContext2D = can.getContext('2d')!
     draw(ctx, size, props.data)
   }
 })

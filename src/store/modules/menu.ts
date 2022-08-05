@@ -1,15 +1,24 @@
 import { defineStore } from 'pinia'
-import { routes } from '@router'
+import { routes } from '@/router'
+import { RouteRecordName } from 'vue-router'
 
 // 动态生成左侧的菜单
-const menus = routes[1].children.map((item, idx) => (
+export type menuType = {
+  title: string | undefined,
+  name: RouteRecordName | undefined,
+  path: string,
+  logo: string | undefined,
+}
+
+const menus: Array<menuType> = routes.filter((_, index) => index === 1).map(item => (
   {
-    title: item.meta.title,
+    title: item.meta?.title,
     name: item.name,
     path: item.path,
-    logo: item.meta.logo
+    logo: item.meta?.logo
   }
 ))
+
 
 export const useMenuStore = defineStore('side-menu', {
   state: () => {

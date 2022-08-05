@@ -7,7 +7,7 @@ export const useTabStore = defineStore('tabs', {
     }
   },
   actions: {
-    add(title) {
+    add(title: string) {
       // 先删除原来的,再添加新的
       const idx = this.tabs.indexOf(title)
       if (idx !== -1) {
@@ -17,7 +17,7 @@ export const useTabStore = defineStore('tabs', {
         this.tabs.push(title)
       }
     },
-    del(title) {
+    del(title: string) {
       const idx = this.tabs.indexOf(title)
       // 找到了,并且不是首页就从数组中删除掉
       if (idx !== -1 && idx !== 0) {

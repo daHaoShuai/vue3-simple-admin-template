@@ -1,16 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@store/user'
+import { AppRouteRecordRaw } from '@/typings'
+import { Store } from 'pinia'
+import { useUserStore } from '@/store/modules/user'
 import { toRaw } from 'vue'
 
 // 左侧的菜单栏根据路由来变化
-export const routes = [
+export const routes: AppRouteRecordRaw[] = [
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     meta: {
       title: '404 not found'
     },
-    component: () => import('@view/404.vue')
+    component: () => import('@/views/404.vue')
   },
   {
     path: '/',
@@ -18,7 +20,7 @@ export const routes = [
     meta: {
       title: '首页'
     },
-    component: () => import('@layout/Main.vue'),
+    component: () => import('@/layout/Main.vue'),
     redirect: '/home',
     children: [
       {
@@ -28,7 +30,7 @@ export const routes = [
           title: '首页',
           logo: 'home-outlined'
         },
-        component: () => import('@view/Home.vue'),
+        component: () => import('@/views/Home.vue'),
       },
       {
         path: '/user',
@@ -37,7 +39,7 @@ export const routes = [
           title: '用户管理',
           logo: 'user-outlined'
         },
-        component: () => import('@view/User.vue'),
+        component: () => import('@/views/User.vue'),
       },
       {
         path: '/about',
@@ -46,7 +48,7 @@ export const routes = [
           title: '关于',
           logo: 'link-outlined'
         },
-        component: () => import('@view/About.vue')
+        component: () => import('@/views/About.vue')
       },
     ]
   },
@@ -56,7 +58,7 @@ export const routes = [
     meta: {
       title: '登录'
     },
-    component: () => import('@view/Login.vue')
+    component: () => import('@/views/Login.vue')
   }
 ]
 
@@ -66,12 +68,12 @@ const router = createRouter({
 })
 
 // 判断状态里面有没有用户的信息
-const isNotLogon = (userStore) => {
+const isNotLogon = (userStore: Store<"user", { userInfo: {} }, {}, { login(username: string, password: string): Promise<string>; logout(): void }>) => {
   return JSON.stringify(toRaw(userStore.userInfo)) === '{}'
 }
 
 // 路由前置拦截
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   document.title = to.meta.title || 'vue3-simple-admin-template'
   // 获取用户信息(一定要在方法里面调用,不然pinia没有初始化好,调用会报错)
   const userStore = useUserStore()

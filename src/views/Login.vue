@@ -15,33 +15,38 @@
     </a-form>
   </div>
 </template>
-<script setup>
+<script lang="ts" setup>
 import { message } from 'ant-design-vue'
-import { useUserStore } from '@store/user'
+import { useUserStore } from '@/store/modules/user'
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()
 const router = useRouter()
-const formState = reactive({
+
+interface FormState {
+  username: string;
+  password: string;
+}
+
+const formState = reactive<FormState>({
   username: '',
   password: ''
 })
 
 // 验证成功
-const onFinish = async ({ username, password }) => {
+const onFinish = async (values: any) => {
   try {
-    const msg = await userStore.login(username, password)
+    const msg = await userStore.login(values?.username, values?.password)
     router.push({ name: 'home' })
     message.success(msg)
-  } catch (error) {
-    message.error(error.msg)
+  } catch (error: any) {
+    message.error(error?.msg)
   }
-
 }
 
 // 验证失败
-const onFinishFailed = errorInfo => {
+const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo)
 }
 </script>

@@ -1,5 +1,10 @@
 // 之后从后台获取用户信息
-export const login = (username, password) => {
+type result = {
+  msg: string,
+  data: {}
+}
+
+export const login: (username: string, password: string) => Promise<result> = (username: string, password: string) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (username && password) {
@@ -13,11 +18,10 @@ export const login = (username, password) => {
               // 角色
               role: ['admin']
             }
-          }, 1000)
-
+          })
         }
       }
       reject({ msg: '登录失败' })
-    })
+    }, 1000)
   })
 }
