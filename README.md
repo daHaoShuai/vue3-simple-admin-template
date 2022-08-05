@@ -1,6 +1,6 @@
 # vue3-simple-admin-template
 
-一个简单的vue3模板项目,使用了vue3+vue-router@4+pinia+unocss+ant-design等
+一个简单的vue3模板项目,使用了vue3+vue-router@4+pinia+unocss+ant-design+echarts等
 
 ## 使用的依赖
 ```json
@@ -9,6 +9,7 @@
     "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.2.10",
     "dayjs": "^1.11.4",
+    "echarts": "^5.3.3",
     "pinia": "^2.0.17",
     "vue": "^3.2.37",
     "vue-router": "4"
