@@ -1,9 +1,10 @@
 // 之后从后台获取用户信息
-type result = {
+interface result {
   msg: string,
   data: {}
 }
 
+// 登录方法
 export const login: (username: string, password: string) => Promise<result> = (username: string, password: string) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -24,4 +25,20 @@ export const login: (username: string, password: string) => Promise<result> = (u
       reject({ msg: '登录失败' })
     }, 1000)
   })
+}
+
+
+interface user {
+  key: number | string,
+  name: string,
+  role: string
+}
+
+// 获取所有的用户
+export const list = (): Array<user> => {
+  return Array(50).fill(0).map((_, i) => ({
+    key: i,
+    name: `name${i + 1}`,
+    role: `role${i + 1}`
+  }))
 }
