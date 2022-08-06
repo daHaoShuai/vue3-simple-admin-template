@@ -7,8 +7,12 @@
 
       <Head />
       <!-- 内容区域 -->
-      <a-layout-content style="min-height:calc(100vh - 100px)">
-        <router-view></router-view>
+      <a-layout-content style="min-height:calc(100vh - 100px);">
+        <router-view v-slot="{ Component }">
+          <transition name="scale" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </a-layout-content>
     </a-layout>
   </a-layout>
