@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, Ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { Form, message } from 'ant-design-vue'
 import { list } from '@/api/user'
 

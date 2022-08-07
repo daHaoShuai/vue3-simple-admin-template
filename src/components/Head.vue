@@ -59,7 +59,8 @@ const route = useRoute()
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 // 侧边栏菜单的状态
-const { collapsed, menus, selectedKeys } = storeToRefs(useMenuStore())
+const menuStore = useMenuStore()
+const { collapsed, menus, selectedKeys } = storeToRefs(menuStore)
 // tab标签的状态
 const tabStore = useTabStore()
 const { tabs } = storeToRefs(tabStore)
@@ -111,6 +112,8 @@ const logoutNow = () => {
   userStore.logout()
   // tab栏也要清除
   tabStore.logout()
+  // 刷新一些左侧的菜单栏
+  menuStore.flush()
   // 左侧菜单栏也要回到首页
   selectedKeys.value = ['home']
   // 跳转登录页面

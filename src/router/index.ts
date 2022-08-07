@@ -42,6 +42,24 @@ export const routes: AppRouteRecordRaw[] = [
         component: () => import('@/views/User.vue'),
       },
       {
+        path: '/video',
+        name: 'video',
+        meta: {
+          title: '视频管理',
+          logo: 'play-circle-outlined'
+        },
+        component: () => import('@/views/Video.vue'),
+      },
+      {
+        path: '/music',
+        name: 'music',
+        meta: {
+          title: '音乐管理',
+          logo: 'bell-outlined'
+        },
+        component: () => import('@/views/Music.vue'),
+      },
+      {
         path: '/about',
         name: 'about',
         meta: {
