@@ -43,5 +43,7 @@ export const useMenuStore = defineStore('side-menu', {
       // 刷新一下左侧的菜单按钮
       this.menus = getMenus(routes)
     }
-  }
+  },
+  // 数据持久化
+  persist: true
 })

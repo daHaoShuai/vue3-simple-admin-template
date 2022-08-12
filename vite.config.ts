@@ -4,10 +4,12 @@ import path from 'path'
 import unocss from 'unocss/vite'
 import Components from 'unplugin-vue-components/vite';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig({
   plugins: [
     vue(),
+    vueJsx(),
     unocss(),
     Components({
       resolvers: [AntDesignVueResolver()],

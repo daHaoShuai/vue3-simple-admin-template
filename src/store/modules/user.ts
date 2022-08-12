@@ -31,5 +31,7 @@ export const useUserStore = defineStore('user', {
       // 清空用户信息
       this.userInfo = {}
     }
-  }
+  },
+  // 数据持久化
+  persist: true
 })
