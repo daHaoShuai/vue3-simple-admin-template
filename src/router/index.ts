@@ -99,12 +99,15 @@ router.beforeEach((to, _, next) => {
   if (isNotLogon(userStore)) {
     if (to.path !== '/login') {
       next({ name: 'login' })
+      return
     }
   } else {
     if (to.path === '/login') {
       next({ name: 'home' })
+      return
     }
   }
+  // 登录后就允许跳转到自己要去的页面
   next()
 })
 
