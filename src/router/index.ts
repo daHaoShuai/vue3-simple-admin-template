@@ -51,13 +51,13 @@ export const routes: AppRouteRecordRaw[] = [
         component: () => import('@/views/Video.vue'),
       },
       {
-        path: '/music',
-        name: 'music',
+        path: '/editor',
+        name: 'editor',
         meta: {
-          title: '音乐管理',
-          logo: 'bell-outlined'
+          title: '富文本编辑',
+          logo: 'edit-outlined'
         },
-        component: () => import('@/views/Music.vue'),
+        component: () => import('@/views/Editor.vue'),
       },
       {
         path: '/about',
